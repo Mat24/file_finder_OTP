@@ -22,7 +22,7 @@ defmodule SuperFileFinder.Application do
   end
 
   def new_worker(params) do
-    Supervisor.start_child(SuperFileFinder.Supervisor, [fn -> Finder.Searcher.start_link(params) end])
+    Supervisor.start_child(SuperFileFinder.Supervisor, params)
   end
 
 end
