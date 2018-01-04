@@ -1,6 +1,10 @@
 defmodule SuperFileFinder do
   
   def file_finder([path: path, filename: filename]) do
-    GenServer.call(Finder.Searcher, [path: path, filename: filename])
+    SuperFileFinder.Application.new_worker([])
+  end
+
+  def file_finder([]) do
+    SuperFileFinder.Application.new_worker([])
   end
 end
