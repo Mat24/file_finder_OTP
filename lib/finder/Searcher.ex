@@ -15,9 +15,9 @@ defmodule Finder.Searcher do
     end
 
     def reducer([], _params, parent_pid, acc) do
-        #GenServer.cast(parent_pid, {:end_process, acc})
-        send parent_pid, {:ok, acc}
-        acc
+        GenServer.cast(parent_pid, {:end_process, acc})
+        #send parent_pid, {:ok, acc}
+        #Process.exit(self(), :normal)
         # Notificar al padre de que termino y darle el resultado    
     end
 
@@ -50,7 +50,7 @@ defmodule Finder.Searcher do
         #Debug
         #IO.inspect dir_content
 
-        reducer(dir_content, params, god_pid, [])
+        reducer(dir_content, params, self(), [])
         {:noreply, :ok}        
     end
 
